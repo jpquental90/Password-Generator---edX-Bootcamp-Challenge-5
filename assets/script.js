@@ -88,10 +88,39 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+
+
+
+
 // Function to prompt user for password options
 function getPasswordOptions() {
+ 
+  let specialAnswer = false;
+  let numericAnswer = false;
+  let lowerCasedAnswer = false;
+  let upperCasedAnswer = false;
 
-}
+  let lengthAnswer = prompt('How many characters would you like your password to contain?');
+    if (lengthAnswer === null || lengthAnswer === '' || isNaN(lengthAnswer)) {
+      alert('Please input a valid number');
+      return false;
+    } else if (lengthAnswer < 8 || lengthAnswer > 128) {
+      alert('Password length must be at least 8 and no more than 128 characters');
+      return false;
+    } else {
+      let specialAnswer = confirm('Click OK to confirm including special characters');
+      let numericAnswer = confirm('Click OK to confirm including numeric characters');
+      let lowerCasedAnswer = confirm('Click OK to confirm including lowercased characters');
+      let upperCasedAnswer = confirm('Click OK to confirm including uppercased characters');
+      return {
+        length: parseInt(lengthAnswer),
+        special: specialAnswer,
+        numeric: numericAnswer,
+        lowerCased: lowerCasedAnswer,
+        upperCased: upperCasedAnswer,
+      }
+    }
+  }
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -99,7 +128,7 @@ function getRandom(arr) {
 }
 
 // Function to generate password with user input
-function generatePassword() {
+function generatePassword(options) {
 
 }
 
@@ -108,11 +137,13 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var options = getPasswordOptions();
+  if (options) {
+  var password = generatePassword(options);
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
-}
+}}
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
