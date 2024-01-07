@@ -132,10 +132,34 @@ function getRandom(arr) {
   return arr[randomIndex];
 }
 
+
 // Function to generate password with user input
 function generatePassword(options) {
+    
+  let characters = [];
+    
+    if (options.special) {
+      characters = characters.concat(specialCharacters);
+    }
+    if (options.numeric) {
+      characters = characters.concat(numericCharacters);
+    }
+    if (options.lowerCased) {
+      characters = characters.concat(lowerCasedCharacters);
+    }
+    if (options.upperCased) {
+      characters = characters.concat(upperCasedCharacters);
+    }
+    
+    let password = '';
+    
+    for (let i = 0; i < options.length; i++) {
+      password += getRandom(characters);
+    }
 
+    return password;
 }
+  
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
