@@ -168,21 +168,24 @@ var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
-  var options = getPasswordOptions();
-  if (options) {
-    var passwordText = document.querySelector('#password');
+  var options;
 
   if (passwordGenerated) {
     let generateNew = confirm('Do you want to generate a new password with the same criteria?')
     if (!generateNew) {
-      passwordText.value = '';
       passwordGenerated = false;
-      getPasswordOptions();
       return;
     }
   }
+  
+  options = getPasswordOptions();
+  
+  if (options) {
+    var passwordText = document.querySelector('#password');
+
     var password = generatePassword(options);
     passwordText.value = password;
+    passwordGenerated = true;
   }
 }
 
