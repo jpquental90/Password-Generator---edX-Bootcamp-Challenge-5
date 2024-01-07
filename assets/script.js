@@ -89,9 +89,6 @@ var upperCasedCharacters = [
 ];
 
 
-
-
-
 // Function to prompt user for password options
 function getPasswordOptions() {
  
@@ -108,10 +105,17 @@ function getPasswordOptions() {
       alert('Password length must be at least 8 and no more than 128 characters');
       return false;
     } else {
-      let specialAnswer = confirm('Click OK to confirm including special characters');
-      let numericAnswer = confirm('Click OK to confirm including numeric characters');
-      let lowerCasedAnswer = confirm('Click OK to confirm including lowercased characters');
-      let upperCasedAnswer = confirm('Click OK to confirm including uppercased characters');
+      do {
+        let specialAnswer = confirm('Click OK to confirm including special characters');
+        let numericAnswer = confirm('Click OK to confirm including numeric characters');
+        let lowerCasedAnswer = confirm('Click OK to confirm including lowercased characters');
+        let upperCasedAnswer = confirm('Click OK to confirm including uppercased characters');
+      
+      if (!(specialAnswer || numericAnswer || lowerCasedAnswer || upperCasedAnswer)) {
+        alert('Please select at least one character type.');
+      }
+    } while (!(specialAnswer || numericAnswer || lowerCasedAnswer || upperCasedAnswer))
+
       return {
         length: parseInt(lengthAnswer),
         special: specialAnswer,
