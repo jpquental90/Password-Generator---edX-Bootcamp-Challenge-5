@@ -106,22 +106,22 @@ function getPasswordOptions() {
       return false;
     } else {
       do {
-        specialAnswer = confirm('Click OK to confirm including special characters');
-        numericAnswer = confirm('Click OK to confirm including numeric characters');
         lowerCasedAnswer = confirm('Click OK to confirm including lowercased characters');
         upperCasedAnswer = confirm('Click OK to confirm including uppercased characters');
-       
-        if (!specialAnswer && !numericAnswer && !lowerCasedAnswer && !upperCasedAnswer) {
+        numericAnswer = confirm('Click OK to confirm including numeric characters');
+        specialAnswer = confirm('Click OK to confirm including special characters');
+        
+        if (!lowerCasedAnswer && !upperCasedAnswer && !specialAnswer && !numericAnswer) {
           alert('Please select at least one character type.');
         }
-      } while (!specialAnswer && !numericAnswer && !lowerCasedAnswer && !upperCasedAnswer); 
+      } while (!lowerCasedAnswer && !upperCasedAnswer && !specialAnswer && !numericAnswer); 
         
       return {
         length: parseInt(lengthAnswer),
-        special: specialAnswer,
-        numeric: numericAnswer,
         lowerCased: lowerCasedAnswer,
-        upperCased: upperCasedAnswer,
+        upperCased: upperCasedAnswer,        
+        numeric: numericAnswer,
+        special: specialAnswer,
       }
     }
   }
@@ -132,31 +132,33 @@ function getRandom(arr) {
   return arr[randomIndex];
 }
 
+let passwordGenerated = false;
 
 // Function to generate password with user input
 function generatePassword(options) {
     
   let characters = [];
     
-    if (options.special) {
-      characters = characters.concat(specialCharacters);
-    }
-    if (options.numeric) {
-      characters = characters.concat(numericCharacters);
-    }
     if (options.lowerCased) {
       characters = characters.concat(lowerCasedCharacters);
     }
     if (options.upperCased) {
       characters = characters.concat(upperCasedCharacters);
     }
+    if (options.numeric) {
+      characters = characters.concat(numericCharacters);
+    }
+    if (options.special) {
+      characters = characters.concat(specialCharacters);
+    }
     
     let password = '';
-    
+
     for (let i = 0; i < options.length; i++) {
       password += getRandom(characters);
     }
 
+    passwordGenerated = true;
     return password;
 }
   
@@ -168,11 +170,21 @@ var generateBtn = document.querySelector('#generate');
 function writePassword() {
   var options = getPasswordOptions();
   if (options) {
-  var password = generatePassword(options);
-  var passwordText = document.querySelector('#password');
+    var passwordText = document.querySelector('#password');
 
-  passwordText.value = password;
-}}
+  if (passwordGenerated) {
+    let generateNew = confirm('Do you want to generate a new password with the same criteria?')
+    if (!generateNew) {
+      passwordText.value = '';
+      passwordGenerated = false;
+      getPasswordOptions();
+      return;
+    }
+  }
+    var password = generatePassword(options);
+    passwordText.value = password;
+  }
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
