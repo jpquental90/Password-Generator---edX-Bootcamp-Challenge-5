@@ -1,4 +1,4 @@
-# Console-Finances
+# Password Generator
 
 This repository contains my answer to the Module 5 Challenge of the Web Development edX bootcamp: 
 
