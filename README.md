@@ -1,6 +1,6 @@
 # Password Generator
 
-This repository contains my answer to the Module 5 Challenge of the Web Development edX bootcamp: 
+This repository contains my answer to the Module 5 Challenge of the Web Development edX bootcamp: https://jpquental90.github.io/Password-Generator---edX-Bootcamp-Challenge-5/
 
 ## Description
 

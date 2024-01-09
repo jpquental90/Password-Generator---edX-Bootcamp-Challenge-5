@@ -97,6 +97,7 @@ function getPasswordOptions() {
   let lowerCasedAnswer = false;
   let upperCasedAnswer = false;
 
+//The code below sets some parameters for the first question, to ensure we get a valid response.
   let lengthAnswer = prompt('How many characters would you like your password to contain?');
     if (lengthAnswer === null || lengthAnswer === '' || isNaN(lengthAnswer)) {
       alert('Please input a valid number');
@@ -105,6 +106,7 @@ function getPasswordOptions() {
       alert('Password length must be at least 8 and no more than 128 characters');
       return false;
     } else {
+//This code will make sure at least one of the questions below is answered positively, by alerting the user when they have not done so and displaying those options again.
       do {
         lowerCasedAnswer = confirm('Click OK to confirm including lowercased characters');
         upperCasedAnswer = confirm('Click OK to confirm including uppercased characters');
@@ -126,7 +128,7 @@ function getPasswordOptions() {
     }
   }
 
-// Function for getting a random element from an array
+// Function for getting a random element from an array - this function will be applied to each of the arrays above.
 function getRandom(arr) {
   let randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
@@ -134,7 +136,7 @@ function getRandom(arr) {
 
 let passwordGenerated = false;
 
-// Function to generate password with user input
+// Function to generate password with user input - this function gather random characters from the arrays displayed above and combines them together to make a single 'word'.
 function generatePassword(options) {
     
   let characters = [];
@@ -165,7 +167,7 @@ function generatePassword(options) {
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
-// Write password to the #password input
+// Write password to the #password input - this function displays the password in the textbox at the end of the process of selecting the desired options for the random password.
 function writePassword() {
   var options;
 
@@ -180,5 +182,5 @@ function writePassword() {
   }
 }
 
-// Add event listener to generate button
+// Add event listener to generate button - this means the desired behaviour happens upon a click of the button.
 generateBtn.addEventListener('click', writePassword);
