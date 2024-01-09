@@ -158,7 +158,6 @@ function generatePassword(options) {
       password += getRandom(characters);
     }
 
-    passwordGenerated = true;
     return password;
 }
   
@@ -170,14 +169,6 @@ var generateBtn = document.querySelector('#generate');
 function writePassword() {
   var options;
 
-  if (passwordGenerated) {
-    let generateNew = confirm('Do you want to generate a new password with the same criteria?')
-    if (!generateNew) {
-      passwordGenerated = false;
-      return;
-    }
-  }
-  
   options = getPasswordOptions();
   
   if (options) {
